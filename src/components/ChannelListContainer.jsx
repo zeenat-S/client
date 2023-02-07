@@ -10,7 +10,7 @@ import LogoutIcon from '../assets/logout.png';
 
 const cookies = new Cookies();
 
-const SideBar = ({logout}) => (
+const SideBar = ({ logout }) => (
     <div className='channel-list__sidebar'>
         <div className='channel-list__sidebar__icon1'>
             <div className='icon1__inner'>
@@ -31,7 +31,7 @@ const CompanyHeader = () => (
     </div>
 )
 
-const ChannelListContainer = () => {
+const ChannelListContainer = ({ isCreating, setIsCreating, setIsEditing, setCreateType }) => {
     const logout = () => {
         cookies.remove('token');
         cookies.remove('userId');
@@ -47,7 +47,7 @@ const ChannelListContainer = () => {
 
     return (
         <>
-            <SideBar logout={logout}/>
+            <SideBar logout={logout} />
             <div className='channel-list__list__wrapper'>
                 <CompanyHeader />
                 <ChannelSearch />
@@ -60,7 +60,11 @@ const ChannelListContainer = () => {
                         <TeamChannelList
                             {...listProps}
                             type='team'
-                />
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
+                            setCreateType={setCreateType}
+                        />
                     )}
                     Preview={(previewProps) => (
                         <TeamChannelPreview
@@ -77,6 +81,10 @@ const ChannelListContainer = () => {
                         <TeamChannelList
                             {...listProps}
                             type='messaging'
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
+                            setCreateType={setCreateType}
                         />
                     )}
                     Preview={(previewProps) => (

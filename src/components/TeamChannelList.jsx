@@ -4,7 +4,7 @@ import { AddChannel } from '../assets';
 
 // need to call the channel list from stream
 
-const TeamChannelList = ({ children, error = false, loading, type }) => {
+const TeamChannelList = ({ children, error = false, loading, type, isCreating, setIsCreating, setIsEditing, setCreateType }) => {
     if (error) {
         return type === 'team' ? (
             <div className='team-channel-list'>
@@ -29,9 +29,17 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
         <div className='team-channel-list'>
             <div className='team-channel-list__header'>
                 <p className='team-channel-list__header__title'>
-                {type === 'team' ? 'Channels' : 'Direct Messages'}
+                    {type === 'team' ? 'Channels' : 'Direct Messages'}
                 </p>
-                {/* button to add the channel*/}
+                {/* add channel button */}
+                {/* Add channel is an svg with a onclick property */}
+                <AddChannel
+                    isCreating={isCreating}
+                    setIsCreating={setIsCreating}
+                    setIsEditing={setIsEditing}
+                    setCreateType={setCreateType}
+                    type={type === 'team' ? 'team' : 'messaging'}
+                />
             </div>
             {children}
         </div>
